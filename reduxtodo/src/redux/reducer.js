@@ -5,15 +5,19 @@ const initialState = {
         {
             id : 1,
             task : "sleep",
-            complete : false,
+            completed : false,
         }
     ]
 }
 
 const todosReducer = (state = initialState , action) => {
      switch (action.type){
-          case COMPLETE_TODO : return { 
-              ...state ,
+          case COMPLETE_TODO :
+           const toggleTodos = state.todos.map((t) => t.id === action.payload.id ? ({...action.payload , completed: !action.payload.completed}) : t);
+
+          return { 
+              ...state,
+              todos : toggleTodos
           }
           default : return state
      }
