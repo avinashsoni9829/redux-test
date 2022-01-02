@@ -3,24 +3,31 @@ import "./TodoInput.css";
 
 
 
-const TodoInput = () => {
-    const [todo , setTodo] = useState("");
+const TodoInput = ({createTodo}) => {
+    const [task , setTask] = useState("");
      
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createTodo(task);
+        setTask("");
 
     };
 
 
     return (
-        <div>
+       
             <form className="TodoInput" onSubmit={handleSubmit}>
 
-                <input type="text" placeholder="Enter the task"  
-                id = "task" name = "task"
-                onchange={(e) => setTodo(e.target.value)} ></input>
+                <input 
+                type="text" 
+                placeholder="Enter the task"  
+                id = "task" 
+                name = "task" 
+                value = {task}
+                onchange={(e) => setTask(e.target.value)} />
                 <button>Add Todo</button>
             </form>
-        </div>
+        
     )
 }
 
